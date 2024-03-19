@@ -1,4 +1,8 @@
 import {Link, withRouter} from 'react-router-dom'
+import {RiHome4Line} from 'react-icons/ri'
+import {IoLogOutOutline} from 'react-icons/io5'
+import {TiShoppingBag} from 'react-icons/ti'
+
 import Cookies from 'js-cookie'
 import './index.css'
 
@@ -15,7 +19,6 @@ const Header = props => {
         alt="website logo"
         className="logo"
       />
-
       <ul className="links-cont">
         <Link className="link" to="/">
           <li>Home</li>
@@ -27,6 +30,17 @@ const Header = props => {
       <button type="button" onClick={onLogout} className="logout">
         Logout
       </button>
+      <div className="all-button-cont">
+        <Link to="/" className="sm-icon">
+          <RiHome4Line />
+        </Link>
+        <Link to="/jobs" className="sm-icon">
+          <TiShoppingBag />
+        </Link>
+        <div className="logout-sm-cont">
+          <IoLogOutOutline className="sm-icon" onClick={onLogout} />
+        </div>
+      </div>
     </div>
   )
 }
