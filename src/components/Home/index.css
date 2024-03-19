@@ -1,0 +1,26 @@
+.home-main-cont {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+.home-sub-cont {
+  background-image: url('https://assets.ccbp.in/frontend/react-js/home-lg-bg.png');
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+.home-head {
+  font-size: 40px;
+  color: #ffffff;
+}
+.home-para {
+  font-size: 20px;
+  color: azure;
+}
+.find-jobs {
+  color: #ffffff;
+  background-color: blue;
+  border-radius: 3px;
+}

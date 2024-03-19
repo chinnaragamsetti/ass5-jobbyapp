@@ -1,0 +1,67 @@
+.eachList {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  background-color: #64748b;
+  margin-bottom: 10px;
+}
+.top-cont {
+  display: flex;
+  justify-content: flex-start;
+}
+.company-logo {
+  width: 40px;
+  height: 40px;
+}
+.company-name-cont {
+  display: flex;
+  flex-direction: column;
+}
+.company-name {
+  font-size: 20px;
+  color: #ffffff;
+}
+.star-cont {
+  display: flex;
+}
+.star {
+  width: 10px;
+  height: 10px;
+}
+.rating {
+  font-size: 10px;
+  color: #ffffff;
+}
+.bottom-cont {
+  display: flex;
+  justify-content: space-between;
+}
+.location-cont {
+  display: flex;
+}
+.location-logo {
+  width: 10px;
+  height: 10px;
+}
+.location {
+  font-size: 10px;
+  color: #ffffff;
+}
+.job-type-cont {
+  display: flex;
+}
+.job-type-logo {
+  width: 10px;
+  height: 10px;
+}
+.job-type {
+  font-size: 10px;
+  color: #ffffff;
+}
+.package {
+  font-size: 10px;
+  color: #ffffff;
+}

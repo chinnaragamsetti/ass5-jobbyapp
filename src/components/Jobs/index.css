@@ -1,0 +1,55 @@
+.jobs-main-cont {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+.jobs-sub-cont {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.jobs-left-cont {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.jobs-right-cont {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.search-results-list {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  list-style-type: none;
+}
+
+@media screen and (min-width: 768px) {
+  .jobs-sub-cont {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+  }
+  .jobs-left-cont {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+  }
+  .jobs-right-cont {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+  }
+  .search-input-cont2 {
+    display: flex;
+    width: 50%;
+  }
+  .search-input2 {
+    width: 70%;
+  }
+  .search-icon {
+    width: 10px;
+    height: 10px;
+  }
+}

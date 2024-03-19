@@ -1,0 +1,15 @@
+.nav-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #2c364c;
+}
+
+.links-cont {
+  display: flex;
+}
+.logo-button {
+  background-color: blue;
+  color: #ffffff;
+  border-radius: 3px;
+}

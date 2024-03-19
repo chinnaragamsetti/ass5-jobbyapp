@@ -1,0 +1,29 @@
+.filers-main-cont {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.hr-line {
+  width: 100%;
+  color: aliceblue;
+}
+
+.employment-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  list-style-type: none;
+}
+.each-list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.emp-label {
+  font-size: 10px;
+  color: #ffffff;
+}

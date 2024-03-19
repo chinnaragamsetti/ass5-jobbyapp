@@ -1,0 +1,17 @@
+.not-found-cont {
+  background-color: #272727;
+  height: 100vh;
+}
+.not-found-image {
+  width: auto;
+  height: auto;
+}
+
+.not-found-head {
+  font-size: 20px;
+  color: #ffffff;
+}
+.not-found-text {
+  font-size: 10px;
+  color: antiquewhite;
+}
