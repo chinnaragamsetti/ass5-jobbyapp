@@ -17,10 +17,10 @@ const Header = props => {
       />
 
       <ul className="links-cont">
-        <Link className="home-link" to="/">
+        <Link className="link" to="/">
           <li>Home</li>
         </Link>
-        <Link className="jobs-link" to="/jobs">
+        <Link className="link" to="/jobs">
           <li>Jobs</li>
         </Link>
       </ul>

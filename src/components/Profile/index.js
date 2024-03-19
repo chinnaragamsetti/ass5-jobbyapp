@@ -1,4 +1,4 @@
-import Component from 'react'
+import {Component} from 'react'
 import {IoMdSearch} from 'react-icons/io'
 import Cookies from 'js-cookie'
 

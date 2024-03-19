@@ -71,6 +71,7 @@ class Login extends Component {
               id="username"
               value={username}
               type="text"
+              className="login-input"
             />
             <label htmlFor="password" className="password">
               Password
@@ -80,6 +81,7 @@ class Login extends Component {
               id="password"
               type="password"
               value={password}
+              className="login-input"
             />
             <button type="submit" className="login-button">
               Login

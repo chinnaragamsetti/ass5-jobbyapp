@@ -3,10 +3,22 @@
   justify-content: space-between;
   align-items: center;
   background-color: #2c364c;
+  height: 10%;
+  padding: 10px;
 }
-
+.logo {
+  width: 100px;
+}
+.link {
+  margin-right: 5px;
+  text-decoration: unset;
+  color: #ffffff;
+}
 .links-cont {
   display: flex;
+  justify-content: space-between;
+  list-style: none;
+  width: 20%;
 }
 .logo-button {
   background-color: blue;

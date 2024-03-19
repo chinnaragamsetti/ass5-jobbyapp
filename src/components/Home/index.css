@@ -8,8 +8,22 @@
   background-size: cover;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
+  justify-content: flex-start;
+  height: 90%;
+  width: 100%;
+  padding: 30px;
+}
+@media screen and (min-width: 768px) {
+  .home-sub-cont {
+    background-image: url('https://assets.ccbp.in/frontend/react-js/home-lg-bg.png');
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 90%;
+    width: 100%;
+    padding: 30px;
+  }
 }
 .home-head {
   font-size: 40px;
@@ -23,4 +37,15 @@
   color: #ffffff;
   background-color: blue;
   border-radius: 3px;
+  padding: 10px;
+  border: none;
+}
+.logout {
+  background-color: blue;
+  border: none;
+  padding: 5px;
+  width: 100px;
+}
+.text-cont {
+  width: 70%;
 }

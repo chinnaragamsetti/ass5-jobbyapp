@@ -1,6 +1,5 @@
 import {Component} from 'react'
 import Cookies from 'js-cookie'
-
 import {IoMdSearch} from 'react-icons/io'
 import Header from '../Header'
 import Profile from '../Profile'

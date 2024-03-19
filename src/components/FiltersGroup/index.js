@@ -1,3 +1,5 @@
+import './index.css'
+
 const FiltersGroup = props => {
   const {
     employmentTypesList,
@@ -16,20 +18,22 @@ const FiltersGroup = props => {
   return (
     <div className="filter-main-cont">
       <hr className="hr-line" />
-      <ul className="employment-list">
-        {employmentTypesList.map(each => (
-          <li key={each.employmentTypeId} className="eachlist">
-            <input
-              type="checkbox"
-              onClick={onChangeEmployment(each.employmentTypeId)}
-              id={each.employmentTypeId}
-            />
-            <label htmlFor={each.label} className="emp-label">
-              {each.label}
-            </label>
-          </li>
-        ))}
-      </ul>
+      <div>
+        <ul className="employment-list">
+          {employmentTypesList.map(each => (
+            <li key={each.employmentTypeId} className="eachlist">
+              <input
+                type="checkbox"
+                onClick={onChangeEmployment(each.employmentTypeId)}
+                id={each.employmentTypeId}
+              />
+              <label htmlFor={each.label} className="emp-label">
+                {each.label}
+              </label>
+            </li>
+          ))}
+        </ul>
+      </div>
       <hr className="hr-line" />
       <ul className="employment-list">
         {salaryRangesList.map(each => (
