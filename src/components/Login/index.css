@@ -55,3 +55,8 @@
   margin-top: 5px;
   margin-bottom: 5px;
 }
+.error {
+  font-size: 10px;
+  color: red;
+  margin-top: 3px;
+}

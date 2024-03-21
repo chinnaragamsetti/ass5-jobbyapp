@@ -1,0 +1,117 @@
+.job-details-main-cont {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/**/
+.job-data-sub-cont {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.job-data {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: lightslategray;
+}
+
+.job-data-top-cont {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+
+.similar-logo {
+  width: 50px;
+  height: 50px;
+}
+.title-cont {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.title {
+  font-size: 20px;
+  color: #ffffff;
+}
+.rating-cont {
+  display: flex;
+}
+.star {
+  width: 10px;
+  height: 10px;
+  color: orange;
+}
+.rating {
+  font-size: 10px;
+  color: #ffffff;
+}
+.job-data-bottom-cont {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.location-type-cont {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.hr-line {
+  width: 100%;
+}
+.desc-cont {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.link-text {
+  color: mediumpurple;
+  font-size: 20px;
+}
+.link-image {
+  width: 20px;
+  height: 20px;
+}
+.skills-list {
+  list-style-type: none;
+  display: flex;
+  flex-wrap: wrap;
+}
+.each-skill {
+  display: flex;
+}
+.life-at-cont {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.life-at-text {
+  width: 50%;
+  font-size: 20px;
+  color: #ffffff;
+}
+.life-at-image {
+  width: 50%;
+  height: auto;
+}
+.similar-jobs-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+.similar-jobs-each-list {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+.similar-each-list-bottom-cont {
+  display: flex;
+}

@@ -1,11 +1,23 @@
 import {Component} from 'react'
 import {IoMdSearch} from 'react-icons/io'
 import Cookies from 'js-cookie'
+import Loader from 'react-loader-spinner'
 
 import './index.css'
 
+const apiStatusConstants = {
+  initial: 'INITIAL',
+  success: 'SUCCESS',
+  inProgress: 'In_PROGRESS',
+  failure: 'FAILURE',
+}
 class Profile extends Component {
-  state = {imageUrl: '', name: '', bio: '', profileStatus: false}
+  state = {
+    imageUrl: '',
+    name: '',
+    bio: '',
+    profileStatus: apiStatusConstants.initial,
+  }
 
   componentDidMount() {
     this.getProfileDetails()
@@ -38,10 +50,10 @@ class Profile extends Component {
     onChangeSearch1(event.target.value)
   }
 
-  render() {
-    const {imageUrl, name, bio, profileStatus} = this.state
-    const {onChangeSearch1} = this.props
-    return profileStatus ? (
+  renderSuccess = onChangeSearch1 => {
+    const {imageUrl, name, bio} = this.state
+
+    return (
       <div className="profile-main-cont">
         <div className="search-input-cont1">
           <input
@@ -57,11 +69,37 @@ class Profile extends Component {
           <p className="role">{bio}</p>
         </div>
       </div>
-    ) : (
-      <div className="profile-main-fail-cont">
-        <p className="retry">Retry</p>
-      </div>
     )
+  }
+
+  renderFailure = () => (
+    <div className="profile-main-fail-cont">
+      <p className="retry">Retry</p>
+    </div>
+  )
+
+  renderInProgress = () => (
+    <div className="loader-container">
+      <Loader type="ThreeDots" color="#0b69ff" height="50" width="50" />
+    </div>
+  )
+
+  render() {
+    const {profileStatus} = this.state
+    const {onChangeSearch1} = this.props
+    switch (profileStatus) {
+      case apiStatusConstants.success:
+        return this.renderSuccess(onChangeSearch1)
+
+      case apiStatusConstants.failure:
+        return this.renderFailure()
+
+      case apiStatusConstants.inProgress:
+        return this.renderInProgress()
+
+      default:
+        return null
+    }
   }
 }
 

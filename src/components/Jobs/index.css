@@ -24,6 +24,37 @@
   width: 100%;
   list-style-type: none;
 }
+.loader-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.jobs-failure-main-cont {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+  align-items: center;
+}
+.jobs-failure-image {
+  width: 50%;
+  height: auto;
+}
+.jobs-failure-head {
+  font-size: 20px;
+  color: #ffffff;
+}
+.jobs-failure-para {
+  font-size: 5px;
+  color: aliceblue;
+}
+.jobs-failure-retry-button {
+  background-color: blue;
+  color: #ffffff;
+  padding: 10px;
+}
 
 @media screen and (min-width: 768px) {
   .jobs-sub-cont {
