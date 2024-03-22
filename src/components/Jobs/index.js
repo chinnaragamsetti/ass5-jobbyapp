@@ -114,11 +114,11 @@ class Jobs extends Component {
     this.getJobs()
   }
 
-  employmentTypesList = Id => {
+  employmentTypeList = Id => {
     this.setState({employment: Id})
   }
 
-  salaryRangesList = Id => {
+  salaryRangeList = Id => {
     this.setState({salaryRange: Id})
   }
 
@@ -198,8 +198,10 @@ class Jobs extends Component {
           <div className="jobs-left-cont">
             <Profile onChangeSearch1={this.onChangeSearch1} />
             <FiltersGroup
-              onClickemp={employmentTypesList}
-              onClicksalary={salaryRangesList}
+              onClickemp={this.employmentTypeList}
+              onClicksalary={this.salaryRangeList}
+              salaryRangesList={salaryRangesList}
+              employmentTypesList={employmentTypesList}
             />
           </div>
           <div className="jobs-right-cont">
