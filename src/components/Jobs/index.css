@@ -1,22 +1,30 @@
 .jobs-main-cont {
   display: flex;
   flex-direction: column;
-  height: 100vh;
 }
 .jobs-sub-cont {
   display: flex;
   flex-direction: column;
   width: 100%;
+  height: auto;
+  background-color: black;
+  padding: 0px;
 }
 .jobs-left-cont {
   display: flex;
   flex-direction: column;
   width: 100%;
+  padding: 20px;
 }
 .jobs-right-cont {
   display: flex;
   flex-direction: column;
+  align-items: center;
   width: 100%;
+}
+.search-input-cont2 {
+  display: none;
+  width: 50%;
 }
 .search-results-list {
   display: flex;
@@ -29,14 +37,16 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  height: 100%;
 }
 
 .jobs-failure-main-cont {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 20px;
   align-items: center;
+  align-self: center;
+  margin-top: 30px;
 }
 .jobs-failure-image {
   width: 50%;
@@ -51,16 +61,38 @@
   color: aliceblue;
 }
 .jobs-failure-retry-button {
+  font-size: 20px;
   background-color: blue;
+  width: 100px;
   color: #ffffff;
-  padding: 10px;
+  border: none;
+  padding: 5px;
+  border-radius: 3px;
+  font-size: 15px;
 }
-
+.jobs-input-cont1 {
+  display: flex;
+}
+.search-input-cont1 {
+  display: flex;
+  height: 20px;
+}
+.search-input1 {
+  width: 100%;
+  border: none;
+  color: #ffffff;
+  background-color: transparent;
+}
+.search-icon1 {
+  height: 100%;
+  background-color: lightslategrey;
+}
 @media screen and (min-width: 768px) {
   .jobs-sub-cont {
     display: flex;
     flex-direction: row;
     width: 100%;
+    padding: 0px;
   }
   .jobs-left-cont {
     display: flex;
@@ -70,17 +102,31 @@
   .jobs-right-cont {
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
+    padding: 10px;
+    align-items: center;
     width: 70%;
   }
   .search-input-cont2 {
     display: flex;
     width: 50%;
+    height: 20px;
+    align-self: flex-start;
+    border: 1px solid lightblue;
+    outline: none;
+    border-radius: 3px;
   }
   .search-input2 {
-    width: 70%;
+    width: 100%;
+    border: none;
+    color: #ffffff;
+    background-color: transparent;
   }
-  .search-icon {
-    width: 10px;
-    height: 10px;
+  .search-icon2 {
+    height: 100%;
+    background-color: lightslategrey;
+  }
+  .search-input-cont1 {
+    display: none;
   }
 }

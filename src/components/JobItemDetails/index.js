@@ -1,10 +1,8 @@
 import {Component} from 'react'
 import Cookies from 'js-cookie'
 import Loader from 'react-loader-spinner'
-import {CiStar} from 'react-icons/ci'
-import {IoBagCheckOutline} from 'react-icons/io5'
-import {IoLocationOutline} from 'react-icons/io5'
-import {FaExternalLinkAlt} from 'react-icons/fa'
+import {IoLocationOutline, IoBagCheckOutline} from 'react-icons/io5'
+import {FaExternalLinkAlt, FaStar} from 'react-icons/fa'
 import Header from '../Header'
 
 import './index.css'
@@ -15,7 +13,7 @@ const apiStatusConstants = {
   failure: 'FAILURE',
   inProgress: 'IN_PROGRESS',
 }
-class JobDetails extends Component {
+class JobItemDetails extends Component {
   state = {
     jobData: {},
     similarJobsData: [],
@@ -28,17 +26,19 @@ class JobDetails extends Component {
   }
 
   getJobDetailsData = async () => {
+    const {match} = this.props
+    const {params} = match
+    const {id} = params
     this.setState({apiStatus: apiStatusConstants.inProgress})
-
     const url = `https://apis.ccbp.in/jobs/${id}`
     const jwtToken = Cookies.get('jwt_token')
     const options = {
       method: 'GET',
       headers: {
-        Authorization: Bearer`${jwt_token}`,
+        Authorization: `Bearer ${jwtToken}`,
       },
     }
-    const response = await fetch(url, option)
+    const response = await fetch(url, options)
     const data = await response.json()
     console.log(data)
     const jobDetails = {
@@ -100,7 +100,7 @@ class JobDetails extends Component {
             <div className="title-cont">
               <p className="title">title</p>
               <div className="rating-cont">
-                <CiStar className="star" />
+                <FaStar className="star" />
                 <p className="rating">{rating}</p>
               </div>
             </div>
@@ -158,7 +158,7 @@ class JobDetails extends Component {
                 <div className="title-cont">
                   <p className="title">{each.similarTitle}</p>
                   <div className="rating-cont">
-                    <CiStar className="star" />
+                    <FaStar className="star" />
                     <p className="rating">{each.similarRating}</p>
                   </div>
                 </div>
@@ -233,4 +233,4 @@ class JobDetails extends Component {
     )
   }
 }
-export default JobDetails
+export default JobItemDetails

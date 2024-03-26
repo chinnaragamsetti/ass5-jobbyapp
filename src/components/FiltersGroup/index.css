@@ -1,8 +1,8 @@
-.filers-main-cont {
+.filter-main-cont {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: flex-start;
   width: 100%;
 }
 .hr-line {
@@ -14,13 +14,18 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
+  padding-left: 0px;
+  margin-left: 0px;
   list-style-type: none;
+}
+.type {
+  font-size: 10px;
+  color: #ffffff;
 }
 .each-list {
   display: flex;
   justify-content: center;
-  align-items: center;
 }
 
 .emp-label {

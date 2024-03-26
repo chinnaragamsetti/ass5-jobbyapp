@@ -1,8 +1,8 @@
 import {Component} from 'react'
 import Cookies from 'js-cookie'
 import Loader from 'react-loader-spinner'
-
 import {IoMdSearch} from 'react-icons/io'
+
 import Header from '../Header'
 import Profile from '../Profile'
 import FiltersGroup from '../FiltersGroup'
@@ -56,8 +56,8 @@ const apiStatusConstants = {
 }
 class Jobs extends Component {
   state = {
-    employment: employmentTypesList[0].label,
-    salaryRange: salaryRangesList[0].label,
+    employment: [employmentTypesList[0].employmentTypeId],
+    salaryRange: salaryRangesList[0].salaryRangeId,
     searchInput: '',
     jobsList: [],
     apiStatus: apiStatusConstants.initial,
@@ -69,9 +69,10 @@ class Jobs extends Component {
 
   getJobs = async () => {
     const {employment, salaryRange, searchInput} = this.state
+    const employmentList = employment.join(',')
     this.setState({apiStatus: apiStatusConstants.inProgress})
     const jwtToken = Cookies.get('jwt_token')
-    const url = `https://apis.ccbp.in/jobs?employment_type=${employment}&minimum_package=${salaryRange}&search=${searchInput}`
+    const url = `https://apis.ccbp.in/jobs?employment_type=${employmentList}&minimum_package=${salaryRange}&search=${searchInput}`
     const options = {
       method: 'GET',
       header: {
@@ -80,8 +81,9 @@ class Jobs extends Component {
     }
     const response = await fetch(url, options)
     const fetchedData = await response.json()
-
-    if (response.ok === true) {
+    console.log(fetchedData)
+    console.log(response)
+    if (response.ok) {
       this.state({apiStatus: apiStatusConstants.inProgress})
       const formattedData = fetchedData.jobs.map(each => ({
         companyLogoUrl: each.company_logo_url,
@@ -97,13 +99,9 @@ class Jobs extends Component {
         jobsList: formattedData,
         apiStatus: apiStatusConstants.success,
       })
-    } else if (response.ok === false) {
+    } else {
       this.setState({apiStatus: apiStatusConstants.failure})
     }
-  }
-
-  onChangeSearch1 = data => {
-    this.setState({searchInput: data})
   }
 
   onChangeSearch2 = event => {
@@ -115,7 +113,7 @@ class Jobs extends Component {
   }
 
   employmentTypeList = Id => {
-    this.setState({employment: Id})
+    this.setState(prevState => ({employment: [...prevState.employment, Id]}))
   }
 
   salaryRangeList = Id => {
@@ -133,7 +131,7 @@ class Jobs extends Component {
         alt="no jobs"
         className="jobs-failure-image"
       />
-      <p className="jobs-failure-head">Oops! Something Went Wrong</p>
+      <p className="jobs-failure-head">No Jobs Found</p>
       <p className="jobs-failure-para">
         We could not found any jobs.Try other filters
       </p>
@@ -190,13 +188,24 @@ class Jobs extends Component {
     const searchResults = jobsList.filter(each =>
       each.title.includes(searchInput),
     )
-    const searchResultsLength = searchResults.length
+    // const searchResultsLength = searchResults.length
     return (
       <div className="jobs-main-cont">
         <Header />
         <div className="jobs-sub-cont">
           <div className="jobs-left-cont">
-            <Profile onChangeSearch1={this.onChangeSearch1} />
+            <div className="search-input-cont1">
+              <input
+                onChange={this.onChangeSearch2}
+                type="search"
+                className="search-input1"
+              />
+              <IoMdSearch
+                onClick={this.onClickSearch}
+                className="search-icon1"
+              />
+            </div>
+            <Profile />
             <FiltersGroup
               onClickemp={this.employmentTypeList}
               onClicksalary={this.salaryRangeList}
@@ -216,9 +225,8 @@ class Jobs extends Component {
                 className="search-icon2"
               />
             </div>
-            {searchResultsLength > 0
-              ? this.renderJobs(searchResults)
-              : this.renderNotFoundJobs()}
+
+            {this.renderJobs(searchResults)}
           </div>
         </div>
       </div>

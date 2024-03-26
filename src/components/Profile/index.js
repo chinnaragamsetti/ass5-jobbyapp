@@ -1,5 +1,4 @@
 import {Component} from 'react'
-import {IoMdSearch} from 'react-icons/io'
 import Cookies from 'js-cookie'
 import Loader from 'react-loader-spinner'
 
@@ -24,6 +23,7 @@ class Profile extends Component {
   }
 
   getProfileDetails = async () => {
+    this.setState({profileStatus: apiStatusConstants.inProgress})
     const jwtToken = Cookies.get('jwt_token')
     const options = {
       headers: {
@@ -33,36 +33,24 @@ class Profile extends Component {
     }
     const url = 'https://apis.ccbp.in/profile'
     const response = await fetch(url, options)
-    if (response.ok === true) {
+    if (response.ok) {
       const fetchedData = await response.json()
-      this.setState(prevState => ({
+      this.setState({
         imageUrl: fetchedData.profile_details.profile_image_url,
         name: fetchedData.profile_details.name,
         bio: fetchedData.profile_details.short_bio,
-        profileStatus: !prevState.profileStatus,
-      }))
-    } else if (response.ok === false) {
-      this.setState(prevState => ({profileStatus: !prevState.profileStatus}))
+        profileStatus: apiStatusConstants.success,
+      })
+    } else {
+      this.setState({profileStatus: apiStatusConstants.failure})
     }
   }
 
-  onChangeSearchInput1 = (onChangeSearch1, event) => {
-    onChangeSearch1(event.target.value)
-  }
-
-  renderSuccess = onChangeSearch1 => {
+  renderSuccess = () => {
     const {imageUrl, name, bio} = this.state
 
     return (
       <div className="profile-main-cont">
-        <div className="search-input-cont1">
-          <input
-            onChange={this.onChangeSearchInput1(onChangeSearch1)}
-            type="search"
-            className="search-input1"
-          />
-          <IoMdSearch className="search-icon1" />
-        </div>
         <div className="profile-sub-cont">
           <img src={imageUrl} alt="profileImage" className="profile-image" />
           <h1 className="profile-name">{name}</h1>
@@ -74,7 +62,9 @@ class Profile extends Component {
 
   renderFailure = () => (
     <div className="profile-main-fail-cont">
-      <p className="retry">Retry</p>
+      <button type="button" className="retry">
+        Retry
+      </button>
     </div>
   )
 
@@ -86,17 +76,14 @@ class Profile extends Component {
 
   render() {
     const {profileStatus} = this.state
-    const {onChangeSearch1} = this.props
+
     switch (profileStatus) {
       case apiStatusConstants.success:
-        return this.renderSuccess(onChangeSearch1)
-
+        return this.renderSuccess()
       case apiStatusConstants.failure:
         return this.renderFailure()
-
       case apiStatusConstants.inProgress:
         return this.renderInProgress()
-
       default:
         return null
     }

@@ -2,26 +2,31 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  border-radius: 10px;
 }
 .profile-sub-cont {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: flex-start;
   background-image: url('https://assets.ccbp.in/frontend/react-js/profile-bg.png');
   background-size: cover;
   padding: 10px;
+  height: 100%;
 }
 .search-input-cont1 {
   display: flex;
+  width: 100%;
+  border: 1px solid lightblue;
+  border-radius: 3px;
+  margin-bottom: 15px;
 }
 .search-icon1 {
   width: 10px;
   height: 10px;
 }
 .profile-image {
-  width: 40px;
-  height: 40px;
+  border-radius: 50px;
 }
 .profile-name {
   font-size: 20px;
@@ -35,12 +40,18 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 10px;
   background-color: black;
+  padding: 50px;
 }
 .retry {
   font-size: 20px;
-  color: blue;
+  background-color: blue;
+  width: 100px;
+  color: #ffffff;
+  border: none;
+  padding: 5px;
+  border-radius: 3px;
+  font-size: 15px;
 }
 
 .loader-container {
