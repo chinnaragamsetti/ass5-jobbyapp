@@ -17,7 +17,7 @@ class JobItemDetails extends Component {
   state = {
     jobData: {},
     similarJobsData: [],
-    skills: [],
+    skillsList: [],
     apiStatus: apiStatusConstants.initial,
   }
 
@@ -53,11 +53,11 @@ class JobItemDetails extends Component {
       packagePerAnnum: data.job_details.package_per_annum,
       rating: data.job_details.rating,
     }
-    const skills = data.map(each => ({
-      skillImageUrl: each.imageUrl,
+    const skills = data.job_details.skills.map(each => ({
+      skillImageUrl: each.image_url,
       skillName: each.name,
     }))
-    const similarJobs = data.job_details.map(each => ({
+    const similarJobs = data.similar_jobs.map(each => ({
       similarCompanyLogoUrl: each.company_logo_url,
       similarEmploymentType: each.employment_type,
       id: each.id,
@@ -66,20 +66,20 @@ class JobItemDetails extends Component {
       similarRating: each.rating,
       similarTitle: each.title,
     }))
-    if (response.ok === true) {
+    if (response.ok) {
       this.setState({
         apiStatus: apiStatusConstants.success,
         jobData: jobDetails,
         similarJobsData: similarJobs,
-        skills,
+        skillsList: skills,
       })
-    } else if (response.ok === false) {
+    } else {
       this.setState({apiStatus: apiStatusConstants.failure})
     }
   }
 
   renderJobDetailsData = () => {
-    const {jobData, similarJobsData, skills} = this.state
+    const {jobData, similarJobsData, skillsList} = this.state
     const {
       companyLogoUrl,
       companyWebsiteUrl,
@@ -107,73 +107,75 @@ class JobItemDetails extends Component {
           </div>
           <div className="job-data-bottom-cont">
             <div className="location-type-cont">
-              <IoLocationOutline className="star" />
+              <IoLocationOutline className="location" />
               <p className="rating">{location}</p>
-              <IoBagCheckOutline className="star" />
+              <IoBagCheckOutline className="location" />
               <p className="rating">{employmentType}</p>
             </div>
             <p className="title">{packagePerAnnum}</p>
           </div>
           <hr className="hr-line" />
           <div className="desc-cont">
-            <p className="title">Description</p>
+            <p className="desc-title">Description</p>
             <a href={companyWebsiteUrl} className="link-text">
               Visit <FaExternalLinkAlt className="link-image" />
             </a>
           </div>
-          <p className="rating">{jobDescription}</p>
-          <p className="title">Skills</p>
-          <ul className="skills-list">
-            {skills.map(each => (
-              <li className="each-skill">
-                <img
-                  src={each.skillImageUrl}
-                  className="similar-logo"
-                  alt="skill-logo"
-                />
-                <p className="rating">{each.skillName}</p>
+          <p className="desc-data">{jobDescription}</p>
+          <div className="skills-list-cont">
+            <p className="desc-title">Skills</p>
+            <ul className="skills-list">
+              {skillsList.map(each => (
+                <li className="each-skill">
+                  <img
+                    src={each.skillImageUrl}
+                    className="similar-logo"
+                    alt="skill-logo"
+                  />
+                  <p className="desc-data">{each.skillName}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="life-at-cont">
+            <p className="desc-title">Life at Company</p>
+            <div className="life-at-cont-desc">
+              <p className="life-at-text">{description}</p>
+              <img
+                src={imageUrl}
+                alt="life-at-imageUrl"
+                className="life-at-imageUrl"
+              />
+            </div>
+          </div>
+        </div>
+        <div className="similar-jobs-cont">
+          <p className="similar-title">SimilarJobs</p>
+          <ul className="similar-jobs-list">
+            {similarJobsData.map(each => (
+              <li className="similar-jobs-each-list">
+                <div className="similar-job-data-top-cont">
+                  <img
+                    src={each.similarCompanyLogoUrl}
+                    alt="logo"
+                    className="similar-logo1"
+                  />
+                  <div className="similar-title-cont">
+                    <p className="similar-text">{each.similarTitle}</p>
+                    <div className="similar-rating-cont">
+                      <FaStar className="star" />
+                      <p className="rating">{each.similarRating}</p>
+                    </div>
+                  </div>
+                </div>
+                <p className="similar-desc-title">Description</p>
+                <p className="similar-desc-para">
+                  {each.similarJobDescription}
+                </p>
               </li>
             ))}
           </ul>
-          <p className="title">Life at Company</p>
-          <div className="life-at-cont">
-            <p className="life-at-text">{description}</p>
-            <img
-              src={imageUrl}
-              alt="life-at-imageUrl"
-              className="life-at-imageUrl"
-            />
-          </div>
         </div>
-        <p className="title">SimilarJobs</p>
-        <ul className="similar-jobs-list">
-          {similarJobsData.map(each => (
-            <li className="similar-jobs-each-list">
-              <div className="job-data-top-cont">
-                <img
-                  src={each.similarCompanyLogoUrl}
-                  alt="logo"
-                  className="similar-logo"
-                />
-                <div className="title-cont">
-                  <p className="title">{each.similarTitle}</p>
-                  <div className="rating-cont">
-                    <FaStar className="star" />
-                    <p className="rating">{each.similarRating}</p>
-                  </div>
-                </div>
-              </div>
-              <p className="title">Description</p>
-              <p className="rating">{each.similarRating}</p>
-              <div className="similar-each-list-bottom-cont">
-                <IoLocationOutline className="star" />
-                <p className="rating">{each.similarLocation}</p>
-                <IoBagCheckOutline className="star" />
-                <p className="rating">{each.similarEmploymentType}</p>
-              </div>
-            </li>
-          ))}
-        </ul>
       </div>
     )
   }
@@ -216,7 +218,7 @@ class JobItemDetails extends Component {
       case apiStatusConstants.success:
         return this.renderJobDetailsData()
       case apiStatusConstants.failure:
-        return this.renderJobDetailsFailure()
+        return this.renderJobDetailsFailureView()
       case apiStatusConstants.inProgress:
         return this.renderLoader()
       default:

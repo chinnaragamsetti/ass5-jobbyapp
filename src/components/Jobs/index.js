@@ -125,7 +125,7 @@ class Jobs extends Component {
   }
 
   renderNotFoundJobs = () => (
-    <div className="not-fount-jobs-cont">
+    <div className="not-found-jobs-cont">
       <img
         src="https://assets.ccbp.in/frontend/react-js/no-jobs-img.png"
         alt="no jobs"
@@ -225,8 +225,9 @@ class Jobs extends Component {
                 className="search-icon2"
               />
             </div>
-
-            {this.renderJobs(searchResults)}
+            {searchResults.length > 0
+              ? this.renderJobs(searchResults)
+              : this.renderNotFoundJobs()}
           </div>
         </div>
       </div>
