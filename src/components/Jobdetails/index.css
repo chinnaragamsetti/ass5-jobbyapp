@@ -7,55 +7,87 @@
   width: 100%;
   background-color: #64748b;
   margin-bottom: 10px;
+  border-radius: 5px;
+  margin-left: 0px;
 }
 .top-cont {
   display: flex;
   justify-content: flex-start;
+  align-items: center;
+  box-sizing: border-box;
+  height: 40px;
 }
 .company-logo {
   width: 40px;
   height: 40px;
+  margin-right: 20px;
 }
 .company-name-cont {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  height: 40px;
 }
 .company-name {
-  font-size: 20px;
+  font-size: 10px;
   color: #ffffff;
 }
 .star-cont {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .star {
   width: 10px;
   height: 10px;
+  color: orange;
+  margin-right: 10px;
 }
 .rating {
   font-size: 10px;
   color: #ffffff;
+  text-decoration: none !important;
 }
 .bottom-cont {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+.bottom-left-cont {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 30%;
 }
 .location-cont {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .location-logo {
   width: 10px;
+  color: #ffffff;
+  font-weight: bold;
   height: 10px;
+  margin-right: 5px;
 }
 .location {
   font-size: 10px;
   color: #ffffff;
+  text-decoration: no;
 }
 .job-type-cont {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .job-type-logo {
   width: 10px;
   height: 10px;
+  color: #ffffff;
+  margin-right: 5px;
 }
 .job-type {
   font-size: 10px;

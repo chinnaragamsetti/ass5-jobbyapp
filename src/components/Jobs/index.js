@@ -56,7 +56,7 @@ const apiStatusConstants = {
 }
 class Jobs extends Component {
   state = {
-    employment: [employmentTypesList[0].employmentTypeId],
+    employment: [],
     salaryRange: salaryRangesList[0].salaryRangeId,
     searchInput: '',
     jobsList: [],
@@ -75,7 +75,7 @@ class Jobs extends Component {
     const url = `https://apis.ccbp.in/jobs?employment_type=${employmentList}&minimum_package=${salaryRange}&search=${searchInput}`
     const options = {
       method: 'GET',
-      header: {
+      headers: {
         Authorization: `Bearer ${jwtToken}`,
       },
     }
@@ -84,7 +84,7 @@ class Jobs extends Component {
     console.log(fetchedData)
     console.log(response)
     if (response.ok) {
-      this.state({apiStatus: apiStatusConstants.inProgress})
+      this.setState({apiStatus: apiStatusConstants.inProgress})
       const formattedData = fetchedData.jobs.map(each => ({
         companyLogoUrl: each.company_logo_url,
         employmentType: each.employment_type,

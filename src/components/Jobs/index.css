@@ -31,6 +31,7 @@
   flex-direction: column;
   width: 100%;
   list-style-type: none;
+  padding-left: 0px;
 }
 .loader-container {
   display: flex;
@@ -86,6 +87,7 @@
 .search-icon1 {
   height: 100%;
   background-color: lightslategrey;
+  cursor: pointer;
 }
 @media screen and (min-width: 768px) {
   .jobs-sub-cont {
@@ -125,6 +127,7 @@
   .search-icon2 {
     height: 100%;
     background-color: lightslategrey;
+    cursor: pointer;
   }
   .search-input-cont1 {
     display: none;

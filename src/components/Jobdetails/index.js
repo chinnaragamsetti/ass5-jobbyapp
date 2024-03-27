@@ -1,4 +1,8 @@
 import {Link} from 'react-router-dom'
+import {FaStar} from 'react-icons/fa'
+import {IoLocationOutline} from 'react-icons/io5'
+import {MdBusinessCenter} from 'react-icons/md'
+
 import './index.css'
 
 const Jobdetails = props => {
@@ -26,7 +30,7 @@ const Jobdetails = props => {
           <div className="company-name-cont">
             <h1 className="company-name">{title}</h1>
             <div className="star-cont">
-              <img src="" alt="star" className="star" />
+              <FaStar className="star" />
               <p className="rating">{rating}</p>
             </div>
           </div>
@@ -34,19 +38,19 @@ const Jobdetails = props => {
         <div className="bottom-cont">
           <div className="bottom-left-cont">
             <div className="location-cont">
-              <img src="" alt="location" className="location-logo" />
+              <IoLocationOutline className="location-logo" />
               <p className="location">{location}</p>
             </div>
             <div className="job-type-cont">
-              <img src="" alt="job-type" className="job-type-logo" />
+              <MdBusinessCenter className="job-type-logo" />
               <p className="job-type">{employmentType}</p>
             </div>
           </div>
           <p className="package">{packagePerAnnum}</p>
         </div>
         <hr className="hr-line" />
-        <p className="description">Description</p>
-        <p className="description">{jobDescription}</p>
+        <p className="title">Description</p>
+        <p className="rating">{jobDescription}</p>
       </li>
     </Link>
   )
