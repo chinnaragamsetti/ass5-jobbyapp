@@ -81,8 +81,7 @@ class Jobs extends Component {
     }
     const response = await fetch(url, options)
     const fetchedData = await response.json()
-    console.log(fetchedData)
-    console.log(response)
+
     if (response.ok) {
       this.setState({apiStatus: apiStatusConstants.inProgress})
       const formattedData = fetchedData.jobs.map(each => ({
@@ -113,11 +112,14 @@ class Jobs extends Component {
   }
 
   employmentTypeList = Id => {
-    this.setState(prevState => ({employment: [...prevState.employment, Id]}))
+    console.log(employmentTypesList)
+    const {employment} = this.state
+    const oldList = [...employment, Id]
+    this.setState({employment: oldList}, this.getJobs)
   }
 
   salaryRangeList = Id => {
-    this.setState({salaryRange: Id})
+    this.setState({salaryRange: Id}, this.getJobs)
   }
 
   onRetry = () => {
@@ -185,8 +187,9 @@ class Jobs extends Component {
 
   render() {
     const {jobsList, searchInput} = this.state
+
     const searchResults = jobsList.filter(each =>
-      each.title.includes(searchInput),
+      each.title.toLowerCase().includes(searchInput.toLowerCase()),
     )
     // const searchResultsLength = searchResults.length
     return (
@@ -197,7 +200,7 @@ class Jobs extends Component {
             <div className="search-input-cont1">
               <input
                 onChange={this.onChangeSearch2}
-                type="search"
+                type="text"
                 className="search-input1"
               />
               <IoMdSearch
@@ -217,7 +220,7 @@ class Jobs extends Component {
             <div className="search-input-cont2">
               <input
                 onChange={this.onChangeSearch2}
-                type="search"
+                type="text"
                 className="search-input2"
               />
               <IoMdSearch

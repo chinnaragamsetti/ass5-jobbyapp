@@ -19,6 +19,7 @@ class JobItemDetails extends Component {
     similarJobsData: [],
     skillsList: [],
     apiStatus: apiStatusConstants.initial,
+    titleName: '',
   }
 
   componentDidMount() {
@@ -40,7 +41,31 @@ class JobItemDetails extends Component {
     }
     const response = await fetch(url, options)
     const data = await response.json()
-    console.log(data)
+
+    const url1 = `https://apis.ccbp.in/jobs`
+    const options1 = {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${jwtToken}`,
+      },
+    }
+    const response1 = await fetch(url1, options1)
+    const data1 = await response1.json()
+
+    const titleData = data1.jobs.filter(each => each.id === id)
+    const formattedData = {
+      companyLogoUrl: titleData[0].company_logo_url,
+      employmentType: titleData[0].employment_type,
+      id: titleData[0].id,
+      location: titleData[0].location,
+      jobDescription: titleData[0].job_description,
+      packagePerAnnum: titleData[0].package_per_annum,
+      rating: titleData[0].rating,
+      title: titleData[0].title,
+    }
+
+    const titleDataName = formattedData.title
+
     const jobDetails = {
       companyLogoUrl: data.job_details.company_logo_url,
       companyWebsiteUrl: data.job_details.company_website_url,
@@ -72,6 +97,7 @@ class JobItemDetails extends Component {
         jobData: jobDetails,
         similarJobsData: similarJobs,
         skillsList: skills,
+        titleName: titleDataName,
       })
     } else {
       this.setState({apiStatus: apiStatusConstants.failure})
@@ -79,7 +105,7 @@ class JobItemDetails extends Component {
   }
 
   renderJobDetailsData = () => {
-    const {jobData, similarJobsData, skillsList} = this.state
+    const {jobData, similarJobsData, skillsList, titleName} = this.state
     const {
       companyLogoUrl,
       companyWebsiteUrl,
@@ -98,7 +124,7 @@ class JobItemDetails extends Component {
           <div className="job-data-top-cont">
             <img src={companyLogoUrl} alt="logo" className="similar-logo" />
             <div className="title-cont">
-              <p className="title">title</p>
+              <p className="title">{titleName}</p>
               <div className="rating-cont">
                 <FaStar className="star" />
                 <p className="rating">{rating}</p>
@@ -112,7 +138,7 @@ class JobItemDetails extends Component {
               <IoBagCheckOutline className="location" />
               <p className="rating">{employmentType}</p>
             </div>
-            <p className="title">{packagePerAnnum}</p>
+            <p className="lpa">{packagePerAnnum}</p>
           </div>
           <hr className="hr-line" />
           <div className="desc-cont">
@@ -138,13 +164,13 @@ class JobItemDetails extends Component {
             </ul>
           </div>
           <div className="life-at-cont">
-            <p className="desc-title">Life at Company</p>
+            <p className="life-at-cont-title">Life at Company</p>
             <div className="life-at-cont-desc">
               <p className="life-at-text">{description}</p>
               <img
                 src={imageUrl}
                 alt="life-at-imageUrl"
-                className="life-at-imageUrl"
+                className="life-at-image"
               />
             </div>
           </div>
@@ -163,8 +189,8 @@ class JobItemDetails extends Component {
                   <div className="similar-title-cont">
                     <p className="similar-text">{each.similarTitle}</p>
                     <div className="similar-rating-cont">
-                      <FaStar className="star" />
-                      <p className="rating">{each.similarRating}</p>
+                      <FaStar className="similar-star" />
+                      <p className="similar-rating">{each.similarRating}</p>
                     </div>
                   </div>
                 </div>
