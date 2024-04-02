@@ -30,17 +30,21 @@ const Header = props => {
       <button type="button" onClick={onLogout} className="logout">
         Logout
       </button>
-      <div className="all-button-cont">
+      <ul className="all-button-cont">
         <Link to="/" className="sm-icon">
-          <RiHome4Line />
+          <li>
+            <RiHome4Line />
+          </li>
         </Link>
         <Link to="/jobs" className="sm-icon">
-          <TiShoppingBag />
+          <li>
+            <TiShoppingBag />
+          </li>
         </Link>
-        <div className="logout-sm-cont">
+        <li className="logout-sm-cont">
           <IoLogOutOutline className="sm-icon" onClick={onLogout} />
-        </div>
-      </div>
+        </li>
+      </ul>
     </div>
   )
 }

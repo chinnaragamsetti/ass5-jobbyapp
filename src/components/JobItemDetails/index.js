@@ -122,9 +122,13 @@ class JobItemDetails extends Component {
       <div className="job-data-sub-cont">
         <div className="job-data">
           <div className="job-data-top-cont">
-            <img src={companyLogoUrl} alt="logo" className="similar-logo" />
+            <img
+              src={companyLogoUrl}
+              alt="job details company logo"
+              className="similar-logo"
+            />
             <div className="title-cont">
-              <p className="title">{titleName}</p>
+              <h1 className="title">{titleName}</h1>
               <div className="rating-cont">
                 <FaStar className="star" />
                 <p className="rating">{rating}</p>
@@ -142,21 +146,21 @@ class JobItemDetails extends Component {
           </div>
           <hr className="hr-line" />
           <div className="desc-cont">
-            <p className="desc-title">Description</p>
+            <h1 className="desc-title">Description</h1>
             <a href={companyWebsiteUrl} className="link-text">
               Visit <FaExternalLinkAlt className="link-image" />
             </a>
           </div>
           <p className="desc-data">{jobDescription}</p>
           <div className="skills-list-cont">
-            <p className="desc-title">Skills</p>
+            <h1 className="desc-title">Skills</h1>
             <ul className="skills-list">
               {skillsList.map(each => (
                 <li className="each-skill">
                   <img
                     src={each.skillImageUrl}
                     className="similar-logo"
-                    alt="skill-logo"
+                    alt={each.skillName}
                   />
                   <p className="desc-data">{each.skillName}</p>
                 </li>
@@ -164,7 +168,7 @@ class JobItemDetails extends Component {
             </ul>
           </div>
           <div className="life-at-cont">
-            <p className="life-at-cont-title">Life at Company</p>
+            <h1 className="life-at-cont-title">Life at Company</h1>
             <div className="life-at-cont-desc">
               <p className="life-at-text">{description}</p>
               <img
@@ -176,18 +180,18 @@ class JobItemDetails extends Component {
           </div>
         </div>
         <div className="similar-jobs-cont">
-          <p className="similar-title">SimilarJobs</p>
+          <h1 className="similar-title">SimilarJobs</h1>
           <ul className="similar-jobs-list">
             {similarJobsData.map(each => (
               <li className="similar-jobs-each-list">
                 <div className="similar-job-data-top-cont">
                   <img
                     src={each.similarCompanyLogoUrl}
-                    alt="logo"
+                    alt="similar job company"
                     className="similar-logo1"
                   />
                   <div className="similar-title-cont">
-                    <p className="similar-text">{each.similarTitle}</p>
+                    <h1 className="similar-text">{each.similarTitle}</h1>
                     <div className="similar-rating-cont">
                       <FaStar className="similar-star" />
                       <p className="similar-rating">{each.similarRating}</p>
@@ -207,7 +211,7 @@ class JobItemDetails extends Component {
   }
 
   renderLoader = () => (
-    <div className="loader-container">
+    <div className="jobItem-loader-container">
       <Loader type="ThreeDots" color="#0b69ff" height="50" width="50" />
     </div>
   )
@@ -217,7 +221,7 @@ class JobItemDetails extends Component {
   }
 
   renderJobDetailsFailureView = () => (
-    <div className="jobs-failure-main-cont">
+    <div className="each-jobs-failure-main-cont">
       <img
         src="https://assets.ccbp.in/frontend/react-js/failure-img.png"
         alt="failure view"

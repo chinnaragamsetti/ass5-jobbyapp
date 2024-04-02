@@ -49,7 +49,7 @@ const Jobdetails = props => {
           <p className="package">{packagePerAnnum}</p>
         </div>
         <hr className="hr-line" />
-        <p className="title">Description</p>
+        <h1 className="title">Description</h1>
         <p className="rating">{jobDescription}</p>
       </li>
     </Link>

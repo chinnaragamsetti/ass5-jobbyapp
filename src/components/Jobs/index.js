@@ -14,18 +14,22 @@ const employmentTypesList = [
   {
     label: 'Full Time',
     employmentTypeId: 'FULLTIME',
+    isChecked: false,
   },
   {
     label: 'Part Time',
     employmentTypeId: 'PARTTIME',
+    isChecked: false,
   },
   {
     label: 'Freelance',
     employmentTypeId: 'FREELANCE',
+    isChecked: false,
   },
   {
     label: 'Internship',
     employmentTypeId: 'INTERNSHIP',
+    isChecked: false,
   },
 ]
 
@@ -53,9 +57,11 @@ const apiStatusConstants = {
   success: 'SUCCESS',
   failure: 'FAILURE',
   inProgress: 'IN_PROGRESS',
+  notFound: 'NOT_FOUND',
 }
 class Jobs extends Component {
   state = {
+    newEmpTypeList: employmentTypesList,
     employment: [],
     salaryRange: salaryRangesList[0].salaryRangeId,
     searchInput: '',
@@ -69,8 +75,9 @@ class Jobs extends Component {
 
   getJobs = async () => {
     const {employment, salaryRange, searchInput} = this.state
+    //  const newEmploymentList = employment.filter(each => each.isChecked)
     const employmentList = employment.join(',')
-    this.setState({apiStatus: apiStatusConstants.inProgress})
+    // console.log(employmentList)
     const jwtToken = Cookies.get('jwt_token')
     const url = `https://apis.ccbp.in/jobs?employment_type=${employmentList}&minimum_package=${salaryRange}&search=${searchInput}`
     const options = {
@@ -81,23 +88,30 @@ class Jobs extends Component {
     }
     const response = await fetch(url, options)
     const fetchedData = await response.json()
+    console.log(fetchedData)
+    console.log(response)
+    console.log(fetchedData.jobs.length)
 
     if (response.ok) {
-      this.setState({apiStatus: apiStatusConstants.inProgress})
-      const formattedData = fetchedData.jobs.map(each => ({
-        companyLogoUrl: each.company_logo_url,
-        employmentType: each.employment_type,
-        id: each.id,
-        location: each.location,
-        jobDescription: each.job_description,
-        packagePerAnnum: each.package_per_annum,
-        rating: each.rating,
-        title: each.title,
-      }))
-      this.setState({
-        jobsList: formattedData,
-        apiStatus: apiStatusConstants.success,
-      })
+      if (fetchedData.jobs.legth === 0) {
+        this.setState({apiStatus: apiStatusConstants.notFound})
+      } else {
+        this.setState({apiStatus: apiStatusConstants.inProgress})
+        const formattedData = fetchedData.jobs.map(each => ({
+          companyLogoUrl: each.company_logo_url,
+          employmentType: each.employment_type,
+          id: each.id,
+          location: each.location,
+          jobDescription: each.job_description,
+          packagePerAnnum: each.package_per_annum,
+          rating: each.rating,
+          title: each.title,
+        }))
+        this.setState({
+          jobsList: formattedData,
+          apiStatus: apiStatusConstants.success,
+        })
+      }
     } else {
       this.setState({apiStatus: apiStatusConstants.failure})
     }
@@ -112,10 +126,20 @@ class Jobs extends Component {
   }
 
   employmentTypeList = Id => {
-    console.log(employmentTypesList)
-    const {employment} = this.state
-    const oldList = [...employment, Id]
-    this.setState({employment: oldList}, this.getJobs)
+    const {newEmpTypeList} = this.state
+    const newEmp = newEmpTypeList.map(each => {
+      if (each.employmentTypeId === Id) {
+        return {...each, isChecked: !each.isChecked}
+      }
+      return each
+    })
+    // console.log(newEmp)
+    const newAddId = newEmp.filter(each => each.isChecked === true)
+    // console.log(newAddId)
+    const newIds = newAddId.map(each => each.employmentTypeId)
+    // console.log(newIds)
+    const oldList = [newIds]
+    this.setState({employment: oldList, newEmpTypeList: newEmp}, this.getJobs)
   }
 
   salaryRangeList = Id => {
@@ -147,7 +171,7 @@ class Jobs extends Component {
         alt="failure view"
         className="jobs-failure-image"
       />
-      <p className="jobs-failure-head">Oops! Something Went Wrong</p>
+      <h1 className="jobs-failure-head">Oops! Something Went Wrong</h1>
       <p className="jobs-failure-para">
         We cannot seem to find the page you are looking for.
       </p>
@@ -180,17 +204,20 @@ class Jobs extends Component {
         )
       case apiStatusConstants.failure:
         return this.renderJobsFailureView()
+
+      case apiStatusConstants.notFound:
+        return this.renderNotFoundJobs()
       default:
         return null
     }
   }
 
   render() {
-    const {jobsList, searchInput} = this.state
+    const {jobsList} = this.state
 
-    const searchResults = jobsList.filter(each =>
-      each.title.toLowerCase().includes(searchInput.toLowerCase()),
-    )
+    // const searchResults = jobsList.filter(each =>
+    // each.title.toLowerCase().includes(searchInput.toLowerCase()),
+    // )
     // const searchResultsLength = searchResults.length
     return (
       <div className="jobs-main-cont">
@@ -200,7 +227,7 @@ class Jobs extends Component {
             <div className="search-input-cont1">
               <input
                 onChange={this.onChangeSearch2}
-                type="text"
+                type="search"
                 className="search-input1"
               />
               <IoMdSearch
@@ -220,17 +247,16 @@ class Jobs extends Component {
             <div className="search-input-cont2">
               <input
                 onChange={this.onChangeSearch2}
-                type="text"
+                type="search"
                 className="search-input2"
               />
               <IoMdSearch
                 onClick={this.onClickSearch}
                 className="search-icon2"
+                data-testid="searchButton"
               />
             </div>
-            {searchResults.length > 0
-              ? this.renderJobs(searchResults)
-              : this.renderNotFoundJobs()}
+            {this.renderJobs(jobsList)}
           </div>
         </div>
       </div>

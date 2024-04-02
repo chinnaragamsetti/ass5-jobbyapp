@@ -48,6 +48,7 @@ const FiltersGroup = props => {
   } = props
 
   const onChangeEmployment = Id => {
+    employmentTypesList.map(each => console.log(each.checked))
     onClickemp(Id)
   }
 
@@ -66,7 +67,7 @@ const FiltersGroup = props => {
               onClick={() => onChangeEmployment(eachEmp.employmentTypeId)}
               id={eachEmp.employmentTypeId}
             />
-            <label htmlFor={eachEmp.label} className="emp-label">
+            <label htmlFor={eachEmp.employmentTypeId} className="emp-label">
               {eachEmp.label}
             </label>
           </li>
@@ -84,7 +85,7 @@ const FiltersGroup = props => {
               className="check-input"
               name="range"
             />
-            <label htmlFor={eachSalary.label} className="emp-label">
+            <label htmlFor={eachSalary.salaryRangeId} className="emp-label">
               {eachSalary.label}
             </label>
           </li>

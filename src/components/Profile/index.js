@@ -46,13 +46,17 @@ class Profile extends Component {
     }
   }
 
+  onClickRetry = () => {
+    this.getProfileDetails()
+  }
+
   renderSuccess = () => {
     const {imageUrl, name, bio} = this.state
 
     return (
       <div className="profile-main-cont">
         <div className="profile-sub-cont">
-          <img src={imageUrl} alt="profileImage" className="profile-image" />
+          <img src={imageUrl} alt="profile" className="profile-image" />
           <h1 className="profile-name">{name}</h1>
           <p className="role">{bio}</p>
         </div>
@@ -62,7 +66,7 @@ class Profile extends Component {
 
   renderFailure = () => (
     <div className="profile-main-fail-cont">
-      <button type="button" className="retry">
+      <button type="button" className="retry" onClick={this.onClickRetry}>
         Retry
       </button>
     </div>
