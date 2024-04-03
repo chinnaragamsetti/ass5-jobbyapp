@@ -93,25 +93,21 @@ class Jobs extends Component {
     console.log(fetchedData.jobs.length)
 
     if (response.ok) {
-      if (fetchedData.jobs.length === 0) {
-        this.setState({apiStatus: apiStatusConstants.notFound})
-      } else {
-        this.setState({apiStatus: apiStatusConstants.inProgress})
-        const formattedData = fetchedData.jobs.map(each => ({
-          companyLogoUrl: each.company_logo_url,
-          employmentType: each.employment_type,
-          id: each.id,
-          location: each.location,
-          jobDescription: each.job_description,
-          packagePerAnnum: each.package_per_annum,
-          rating: each.rating,
-          title: each.title,
-        }))
-        this.setState({
-          jobsList: formattedData,
-          apiStatus: apiStatusConstants.success,
-        })
-      }
+      this.setState({apiStatus: apiStatusConstants.inProgress})
+      const formattedData = fetchedData.jobs.map(each => ({
+        companyLogoUrl: each.company_logo_url,
+        employmentType: each.employment_type,
+        id: each.id,
+        location: each.location,
+        jobDescription: each.job_description,
+        packagePerAnnum: each.package_per_annum,
+        rating: each.rating,
+        title: each.title,
+      }))
+      this.setState({
+        jobsList: formattedData,
+        apiStatus: apiStatusConstants.success,
+      })
     } else {
       this.setState({apiStatus: apiStatusConstants.failure})
     }
@@ -189,7 +185,9 @@ class Jobs extends Component {
     const {apiStatus} = this.state
     switch (apiStatus) {
       case apiStatusConstants.success:
-        return (
+        return searchResults.length === 0 ? (
+          this.renderNotFoundJobs()
+        ) : (
           <ul className="search-results-list">
             {searchResults.map(each => (
               <Jobdetails key={each.id} eachDetails={each} />
