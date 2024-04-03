@@ -93,7 +93,7 @@ class Jobs extends Component {
     console.log(fetchedData.jobs.length)
 
     if (response.ok) {
-      if (fetchedData.jobs.legth === 0) {
+      if (fetchedData.jobs.length === 0) {
         this.setState({apiStatus: apiStatusConstants.notFound})
       } else {
         this.setState({apiStatus: apiStatusConstants.inProgress})
