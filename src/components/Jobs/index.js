@@ -87,12 +87,12 @@ class Jobs extends Component {
       },
     }
     const response = await fetch(url, options)
-    const fetchedData = await response.json()
-    console.log(fetchedData)
-    console.log(response)
-    console.log(fetchedData.jobs.length)
+    // console.log(fetchedData)
+    // console.log(response)
+    // console.log(fetchedData.jobs.length)
 
     if (response.ok) {
+      const fetchedData = await response.json()
       this.setState({apiStatus: apiStatusConstants.inProgress})
       const formattedData = fetchedData.jobs.map(each => ({
         companyLogoUrl: each.company_logo_url,

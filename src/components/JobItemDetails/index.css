@@ -20,12 +20,12 @@
   background-color: black;
 }
 .jobItem-loader-container {
-  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: black;
+  height: 100vh;
 }
 .lpa {
   font-size: 10px;
